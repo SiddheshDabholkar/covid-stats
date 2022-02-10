@@ -2,12 +2,18 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { connectToDevTools } from "react-devtools-core";
 
-import Country from "./screens/Country";
 import Home from "./screens/Home";
-import SearchCountry from "./screens/SearchCountry";
 
 const Stack = createNativeStackNavigator();
+
+if (__DEV__) {
+  connectToDevTools({
+    host: "localhost",
+    port: 8097,
+  });
+}
 
 export default function App() {
   return (
@@ -19,9 +25,7 @@ export default function App() {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="SearchCountry" component={SearchCountry} />
-          {/* <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Country" component={Country} /> */}
+          <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />
